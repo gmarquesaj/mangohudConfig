@@ -1,19 +1,20 @@
 extends Panel
 
-
 var nome : String
 var rotulo : String
-func iniciar(onome,orotulo,corPadrao):
+func iniciar(onome,orotulo,textoPadrao):
 	nome = onome
 	rotulo = orotulo
 	$lb.text = rotulo
-	$btCor.color = Color(corPadrao)
+	$edtText.text = textoPadrao
 
 func resultado():
 	var res = "#  "+rotulo+"\n"
+	var txt = nome+"="+$edtText.text
 	if($lb.pressed==false):
-		res += "# "
-	res+=nome+ " = "+$btCor.color.to_html(false)
+		res += "#"+txt
+	else:
+		res+=txt
 	return res
 func _ready():
 	rect_min_size.y=30

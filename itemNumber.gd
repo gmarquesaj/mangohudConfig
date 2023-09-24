@@ -3,17 +3,17 @@ extends Panel
 
 var nome : String
 var rotulo : String
-func iniciar(onome,orotulo,corPadrao):
+func iniciar(onome,orotulo,valorPadrao):
 	nome = onome
 	rotulo = orotulo
 	$lb.text = rotulo
-	$btCor.color = Color(corPadrao)
+	$spBox.value = valorPadrao
 
 func resultado():
 	var res = "#  "+rotulo+"\n"
 	if($lb.pressed==false):
 		res += "# "
-	res+=nome+ " = "+$btCor.color.to_html(false)
+	res+="%s=%f"%[nome,$spBox.value]
 	return res
 func _ready():
 	rect_min_size.y=30

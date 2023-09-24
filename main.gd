@@ -1,6 +1,9 @@
 extends Control
 var linhaCheck = preload("res://itemCheck.tscn")
 var linhaCor = preload("res://itemColor.tscn")
+var linhaTexto = preload("res://itemText.tscn")
+var linhaNumero= preload("res://itemNumber.tscn")
+
 
 onready var grid = $scrollC/grid
 
@@ -12,42 +15,66 @@ func addColor(nome,rotulo,padrao="#000000"):
 	var novo = linhaCor.instance()
 	novo.iniciar(nome,rotulo,padrao)
 	grid.add_child(novo)	
+func addText(nome,rotulo,padrao="#NAO PREENCHIDO#"):
+	var novo = linhaTexto.instance()
+	novo.iniciar(nome,rotulo,padrao)
+	grid.add_child(novo)
+func addNumber(nome,rotulo,padrao=1.0):
+	var novo = linhaNumero.instance()
+	novo.iniciar(nome,rotulo,padrao)
+	grid.add_child(novo)
 func _ready():
-	addColor("gpu_color","cor do uso da gpu",Color("#57f542"))
-	addColor("cpu_color","cor do uso da cpu",Color("#42c5f5"))
-	addColor("vram_color","cor da vram",Color("#57f542"))
-	addColor("ram_color","cor da ram",Color("#42c5f5"))
-	addColor("io_color","cor do disco",Color("#b942f5"))
-	addColor("engine_color","engine_color",Color("#ffffff"))
-	addColor("frametime_color","cor do grafico",Color("#00ff95"))
-	addColor("background_color","background_color",Color("#000000"))
-	addColor("text_color","text_color",Color("#ffffff"))
-
-
-
+	addNumber("background_alpha","background alpha",0.3)
+	addNumber("font_scale","escala fonte",1.0)
+	addNumber("font_size","tamanho fonte",20.0)
+	addNumber("offset_x","offset x",15.0)
+	addNumber("offset_y","offset y",15.0)
+	
+	
+	addNumber("round_corners","angulo dos cantos",5.0)
+	addNumber("text_outline_thickness","contorno",1.5)
+	addCheck("text_outline","usar contorno")
+	addColor("text_outline_color","cor do contorno",("#ff0000"))
+	
 	addCheck("fps","frames por segundo")
-	addCheck("gpu_name","nome da gpu")
-	addCheck("vram","ram gpu")
-	addCheck("ram","ram cpu")
-	addCheck("gpu_stats","uso da gpu")
-	addCheck("gpu_temp","temp gpu")
-	addCheck("cpu_stats","uso da cpu")
-	addCheck("cpu_temp","temp cpu")
-	addCheck("resolution","resolução")
 	addCheck("frametime","frametime")
 	addCheck("frame_timing","grafico do frame time")
+	
+	addText("cpu_text","rotulo da cpu","CPU")
+	addCheck("cpu_stats","uso da cpu")
+	addCheck("cpu_temp","temp cpu")
+	addColor("cpu_color","cor do uso da cpu",("#42c5f5"))
+	addCheck("cpu_mhz","freq cpu")
+	addCheck("core_load","uso dos nucleos")
+	addCheck("ram","ram cpu")
+	addColor("ram_color","cor da ram",("#42c5f5"))
+
+
+	addText("gpu_text","rotulo da gpu","GPU")
+	addCheck("gpu_stats","uso da gpu")
+	addCheck("gpu_name","nome da gpu")
+	addCheck("gpu_temp","temp gpu")
+	addColor("gpu_color","cor do uso da gpu",("#57f542"))
+	addCheck("vram","ram gpu")
+	addColor("vram_color","cor da vram",("#57f542"))
+
+	addColor("io_color","cor do disco",("#b942f5"))
+	addColor("engine_color","engine_color",("#ffffff"))
+	addColor("frametime_color","cor do grafico",("#00ff95"))
+	addColor("background_color","background_color",("#000000"))
+	addColor("text_color","text_color",("#ffffff"))
+
+
+
+	addCheck("resolution","resolução")
 	addCheck("vulkan_driver"," versao do driver vulkan")
 	addCheck("wine","versao do wine")
 	addCheck("gamemode","estado do \"gamemode\"")
-	addCheck("cpu_mhz","freq cpu")
-	addCheck("core_load","uso dos nucleos")
+	
 	addCheck("io_stats","estado do disco")
 	addCheck("io_read","leitura do disco")
 	addCheck("io_write","escrita do disco")
-#	addCheck("","")
-#	addCheck("","")
-#	addCheck("ram","ram cpu")
-#	addCheck("gpu_text","")
+
 
 
 func _on_btSalvar_pressed():
