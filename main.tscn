@@ -32,15 +32,16 @@ text = "Caminho do arquivo"
 margin_left = 24.0
 margin_top = 18.0
 margin_right = 640.0
-margin_bottom = 327.0
+margin_bottom = 583.0
 
 [node name="grid" type="GridContainer" parent="scrollC"]
 margin_right = 616.0
-margin_bottom = 309.0
+margin_bottom = 565.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="TextEdit" type="TextEdit" parent="."]
+visible = false
 margin_left = 10.0
 margin_top = 335.0
 margin_right = 648.0

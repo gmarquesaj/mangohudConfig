@@ -5,6 +5,7 @@
 [node name="itemText" type="Panel"]
 anchor_right = 1.0
 anchor_bottom = 0.0528571
+margin_bottom = -4.35714
 rect_pivot_offset = Vector2( 376, 123 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -14,15 +15,15 @@ __meta__ = {
 }
 
 [node name="lb" type="CheckBox" parent="."]
-margin_left = 7.0
-margin_top = 5.0
-margin_right = 170.0
-margin_bottom = 29.0
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 166.0
+margin_bottom = 27.0
 pressed = true
 text = "texto de algum coisa"
 
 [node name="edtText" type="LineEdit" parent="."]
-margin_left = 176.0
-margin_top = 5.0
-margin_right = 384.0
-margin_bottom = 29.0
+margin_left = 175.0
+margin_top = 3.0
+margin_right = 383.0
+margin_bottom = 27.0
