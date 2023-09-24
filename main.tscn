@@ -29,22 +29,36 @@ margin_bottom = 610.0
 text = "Caminho do arquivo"
 
 [node name="scrollC" type="ScrollContainer" parent="."]
-margin_left = 24.0
+margin_left = 10.0
 margin_top = 18.0
-margin_right = 640.0
-margin_bottom = 583.0
+margin_right = 648.0
+margin_bottom = 587.0
 
 [node name="grid" type="GridContainer" parent="scrollC"]
-margin_right = 616.0
-margin_bottom = 565.0
+margin_right = 638.0
+margin_bottom = 569.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TextEdit" type="TextEdit" parent="."]
-visible = false
+[node name="edtSaida" type="TextEdit" parent="."]
 margin_left = 10.0
-margin_top = 335.0
+margin_top = 449.0
 margin_right = 648.0
 margin_bottom = 581.0
 
+[node name="lb2" type="Label" parent="."]
+margin_left = 287.0
+margin_top = 429.0
+margin_right = 359.0
+margin_bottom = 443.0
+text = "Texto Salvo"
+
+[node name="btFecharSaida" type="Button" parent="."]
+margin_left = 573.0
+margin_top = 423.0
+margin_right = 644.0
+margin_bottom = 443.0
+text = "esconder"
+
 [connection signal="pressed" from="btSalvar" to="." method="_on_btSalvar_pressed"]
+[connection signal="pressed" from="btFecharSaida" to="." method="_on_btFecharSaida_pressed"]

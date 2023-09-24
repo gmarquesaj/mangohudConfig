@@ -12,64 +12,68 @@ func addCheck(nome,rotulo):
 	var novo = linhaCheck.instance()
 	novo.iniciar(nome,rotulo)
 	grid.add_child(novo)
+
 func addColor(nome,rotulo,padrao="#000000"):
 	var novo = linhaCor.instance()
 	novo.iniciar(nome,rotulo,padrao)
-	grid.add_child(novo)	
+	grid.add_child(novo)
+
 func addText(nome,rotulo,padrao="#NAO PREENCHIDO#"):
 	var novo = linhaTexto.instance()
 	novo.iniciar(nome,rotulo,padrao)
 	grid.add_child(novo)
+
 func addNumber(nome,rotulo,padrao=1.0):
 	var novo = linhaNumero.instance()
 	novo.iniciar(nome,rotulo,padrao)
 	grid.add_child(novo)
+
 func addLabel(rotulo):
 	var novo = linhaRotulo.instance()
 	novo.iniciar(rotulo)
 	grid.add_child(novo)
+
 func _ready():
-	
-	addLabel("PROCESSADOR")
+	_on_btFecharSaida_pressed()
+	addLabel("PROCESSADOR/RAM")
 	addText("cpu_text","rotulo da cpu","CPU")
-	addCheck("cpu_stats","uso da cpu")
-	addCheck("cpu_temp","temp cpu")
+	addCheck("cpu_stats","exibir o uso")
+	addCheck("cpu_temp","temperatura")
 	addColor("cpu_color","cor do uso da cpu",("#42c5f5"))
-	addCheck("cpu_mhz","freq cpu")
-	addCheck("core_load","uso dos nucleos")
-	addCheck("ram","ram cpu")
+	addCheck("cpu_mhz","exibir frequencia")
+	addCheck("core_load","exibir o uso de cada um dos nucleos/threads")
+	addCheck("ram","exibir uso de memoria ram")
 	addColor("ram_color","cor da ram",("#42c5f5"))
 	
 	addLabel("PLACA DE VIDEO")
+	addCheck("gpu_stats","Exibir o uso")
 	addText("gpu_text","rotulo da gpu","GPU")
-	addCheck("gpu_stats","uso da gpu")
-	addCheck("gpu_name","nome da gpu")
-	addCheck("gpu_temp","temp gpu")
-	addColor("gpu_color","cor do uso da gpu",("#57f542"))
-	addCheck("vram","ram gpu")
+	addCheck("gpu_name","exibir nome")
+	addCheck("gpu_temp","temperatura")
+	addColor("gpu_color","cor do \"uso da gpu\"",("#57f542"))
+	addCheck("vram","exibir uso da memoria de video")
 	addColor("vram_color","cor da vram",("#57f542"))
 	
 	addLabel("MONITORAMENTO")
 	addCheck("fps","frames por segundo")
 	addCheck("frametime","frametime")
-	addCheck("frame_timing","grafico do frame time")
-	addColor("frametime_color","cor do grafico",("#00ff95"))
+	addCheck("frame_timing","grafico do frameTime")
+	addColor("frametime_color","cor do grafico frameTime",("#00ff95"))
 	
 	addLabel("HUD")
-	addColor("background_color","background_color",("#000000"))
-	addNumber("background_alpha","background alpha",0.3)
-	addColor("text_color","text_color",("#ffffff"))
-	addNumber("font_scale","escala fonte",1.0)
-	addNumber("font_size","tamanho fonte",20.0)
-	addNumber("offset_x","offset x",15.0)
-	addNumber("offset_y","offset y",15.0)	
+	addColor("background_color","cor de fundo",("#000000"))
+	addNumber("background_alpha","transparencia",0.3)
+	addColor("text_color","cor do texto",("#ffffff"))
+	addNumber("font_scale","escala da fonte",1.0)
+	addNumber("font_size","tamanho da fonte",20.0)
+	addNumber("offset_x","offset no eixo X",15.0)
+	addNumber("offset_y","offset no eixo Y",15.0)	
 	addNumber("round_corners","angulo dos cantos",5.0)
-	addNumber("text_outline_thickness","contorno",1.5)
 	addCheck("text_outline","usar contorno")
+	addNumber("text_outline_thickness","contorno",1.5)
 	addColor("text_outline_color","cor do contorno",("#ff0000"))
 
 	addLabel("ENGINE")
-
 	addColor("engine_color","cor das informaçoes",("#ffffff"))
 	addCheck("resolution","resolução")
 	addCheck("vulkan_driver"," versao do driver vulkan")
@@ -85,12 +89,27 @@ func _ready():
 
 
 func _on_btSalvar_pressed():
+	#gerar o texto
 	var texto:String="##################\n#\n#- Wed Sep 13\n# Gilson Marques Alves Junior/Pirapora/MG/Brazil \n##################\n\n"
 	for i in grid.get_children():
 		texto+=i.resultado()+"\n\n"
-	$TextEdit.text = texto
+	$edtSaida.text = texto
+	#salvar texto para arquivo
 	var file = File.new()
 	print(file.open($edtPath.text, File.WRITE))
 	file.store_string(texto)
 	file.close()
+	# exibir o texto gerado
+	$lb2.visible=true
+	$edtSaida.visible=true
+	$btFecharSaida.visible=true
+	$scrollC.rect_size.y=390
 
+
+
+func _on_btFecharSaida_pressed():
+	#esconder o texto gerado
+	$lb2.visible=false
+	$edtSaida.visible=false
+	$btFecharSaida.visible=false
+	$scrollC.rect_size.y=550
